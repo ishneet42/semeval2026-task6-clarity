@@ -23,3 +23,5 @@ outputs/
 subtask1/
 subtask1_bert/
 subtask1_deberta/
+subtask1_svm/
+subtask2/
