@@ -1,6 +1,5 @@
 """
-Train DeBERTa-v3-base for CLARITY (Task 1) and write a Codabench-ready submission.
-
+DeBERTa-v3-base for CLARITY (Task 1) 
 Steps:
 1. Load the QEvasion dataset.
 2. Build text = question + " [SEP] " + interview_answer.
@@ -8,7 +7,6 @@ Steps:
 4. Fine-tune microsoft/deberta-v3-base with specified hyperparameters.
 5. Report accuracy, micro_f1, macro_f1 on dev; warn if micro_f1 < baseline (~0.65).
 6. Predict the test split (308 rows, original order), map ids to labels, and write `prediction`.
-7. Print zip command.
 """
 
 import numpy as np

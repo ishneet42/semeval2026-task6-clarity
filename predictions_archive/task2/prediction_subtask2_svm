@@ -9,7 +9,7 @@ Deflection
 General
 Explicit
 Implicit
-General
+Explicit
 Implicit
 Explicit
 Explicit
@@ -18,18 +18,18 @@ Claims ignorance
 Explicit
 Deflection
 Explicit
-Dodging
+Explicit
 Dodging
 Dodging
 Implicit
 Explicit
 Implicit
-Explicit
-General
-Deflection
 Explicit
 Implicit
 Deflection
+Explicit
+Deflection
+Explicit
 Dodging
 Explicit
 Explicit
@@ -44,7 +44,7 @@ Explicit
 Explicit
 Explicit
 Deflection
-Implicit
+Explicit
 Explicit
 Explicit
 Deflection
@@ -75,7 +75,7 @@ Explicit
 Explicit
 Implicit
 Explicit
-General
+Explicit
 Deflection
 Deflection
 Explicit
@@ -121,7 +121,7 @@ Explicit
 Explicit
 Claims ignorance
 Explicit
-General
+Explicit
 General
 Explicit
 Explicit
@@ -155,7 +155,7 @@ Explicit
 Explicit
 General
 Dodging
-Claims ignorance
+Explicit
 Explicit
 Explicit
 Dodging
@@ -165,8 +165,8 @@ Implicit
 Explicit
 Explicit
 Implicit
-Dodging
 Explicit
+General
 Explicit
 Explicit
 General
@@ -186,7 +186,7 @@ Explicit
 Explicit
 Declining to answer
 Deflection
-Dodging
+General
 Explicit
 Explicit
 Implicit
@@ -252,20 +252,20 @@ Explicit
 Explicit
 Explicit
 Implicit
-Clarification
+Dodging
 Dodging
 General
 Explicit
 Explicit
 Explicit
-Declining to answer
+Explicit
 Explicit
 Deflection
 Explicit
 Explicit
 Declining to answer
-Explicit
-Dodging
+Implicit
+Deflection
 General
 General
 Explicit
@@ -284,7 +284,7 @@ Explicit
 General
 Implicit
 Dodging
-General
+Explicit
 Explicit
 Explicit
 General
@@ -292,7 +292,7 @@ Explicit
 Explicit
 Explicit
 Implicit
-Dodging
+Explicit
 Explicit
 Explicit
 Dodging

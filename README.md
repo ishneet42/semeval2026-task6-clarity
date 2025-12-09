@@ -13,7 +13,7 @@ The goal is to build and evaluate models that can **unmask when a politician dod
 
 ---
 
-## 🌱 Project Goals
+## Project Goals
 
 - Build baseline models for:
   - **Clarity classification** – clear vs. ambiguous/evasive responses.
@@ -25,7 +25,7 @@ The goal is to build and evaluate models that can **unmask when a politician dod
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 semeval-clarity-evasion/
@@ -37,4 +37,3 @@ semeval-clarity-evasion/
 │   └── ...                   # (later) models, training & inference scripts
 ├── requirements.txt
 └── README.md
-

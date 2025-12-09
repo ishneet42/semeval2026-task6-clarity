@@ -1,5 +1,6 @@
 """
-Train a TF-IDF + Linear SVM classifier for Task 2 (evasion)
+TF-IDF + Linear SVM classifier for Task 2 (evasion)
+Simple, stable baseline:
 - text = question + " [SEP] " + interview_answer
 - Stratified 10% dev split on evasion_label
 - TF-IDF word 1-3 grams (max 200k), class_weight balanced, C=1.5
