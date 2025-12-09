@@ -1,11 +1,11 @@
 """
-Train a TF-IDF (word + char) + Linear SVM classifier for CLARITY (Task 1) and write a submission file.
+Train a TF-IDF + Linear SVM classifier for CLARITY (Task 1) and write a submission file.
 
 Steps:
 - Load QEvasion.
 - text = question + " [SEP] " + interview_answer.
 - Stratified 10% dev split on clarity_label.
-- Train TF-IDF word (1-3 grams) + char (3-5 grams) + LinearSVC (class_weight='balanced', tuned C).
+- Train TF-IDF (1-3 grams) + LinearSVC (class_weight='balanced').
 - Report accuracy, micro_f1, macro_f1 on dev.
 - Predict the 308-row test split in original order and write `prediction_svm`.
 - Print zip command.
@@ -18,7 +18,7 @@ import numpy as np
 from datasets import DatasetDict, load_dataset
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 from sklearn.metrics import accuracy_score, f1_score
 
@@ -57,18 +57,21 @@ def make_splits(ds: DatasetDict, cfg: Config):
 
 
 def build_model():
-    word_vect = TfidfVectorizer(
-        analyzer="word",
-        ngram_range=(1, 3),
-        min_df=2,
-        max_features=200_000,
-        sublinear_tf=True,
-    )
-
     return Pipeline(
         [
-            ("tfidf", word_vect),
-            ("clf", LinearSVC(class_weight="balanced", C=1.5)),
+            (
+                "tfidf",
+                TfidfVectorizer(
+                    ngram_range=(1, 3),
+                    min_df=2,
+                    max_features=150000,
+                    sublinear_tf=True,
+                ),
+            ),
+            (
+                "clf",
+                LinearSVC(class_weight="balanced"),
+            ),
         ]
     )
 
