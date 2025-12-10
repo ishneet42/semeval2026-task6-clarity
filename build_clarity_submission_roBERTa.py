@@ -1,5 +1,5 @@
 """
-DeBERTa-v3-base for CLARITY (Task 1) 
+roBERTa-v3-base for CLARITY (Task 1)
 Steps:
 1. Load the QEvasion dataset.
 2. Build text = question + " [SEP] " + interview_answer.
@@ -43,8 +43,8 @@ class Config:
     max_length: int = 192
     learning_rate: float = 2e-5
     num_train_epochs: int = 3
-    per_device_train_batch_size: int = 2
-    per_device_eval_batch_size: int = 2
+    per_device_train_batch_size: int = 8
+    per_device_eval_batch_size: int = 8
     warmup_ratio: float = 0.1
     weight_decay: float = 0.01
     output_dir: str = "outputs/roberta_clarity"
@@ -59,7 +59,9 @@ def parse_args():
     parser.add_argument("--train-batch-size", type=int, default=None, help="Override per-device train batch size")
     parser.add_argument("--eval-batch-size", type=int, default=None, help="Override per-device eval batch size")
     parser.add_argument("--max-length", type=int, default=None, help="Override max sequence length")
-    return parser.parse_args()
+    args, _ = parser.parse_known_args()  # <-- ignore unknown args
+    return args
+    #return parser.parse_args()
 
 
 def load_and_prepare(cfg: Config) -> DatasetDict:
@@ -130,7 +132,7 @@ def main():
 
     training_args = TrainingArguments(
         output_dir=cfg.output_dir,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         save_strategy="epoch",
         learning_rate=cfg.learning_rate,
         per_device_train_batch_size=cfg.per_device_train_batch_size,
@@ -142,6 +144,7 @@ def main():
         metric_for_best_model="micro_f1",
         greater_is_better=True,
         logging_steps=50,
+        fp16=True,
         push_to_hub=False,
     )
 
@@ -182,3 +185,28 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+import numpy as np
+
+# Predict on test set
+test_dataset = tokenized["test"]  # your tokenized DatasetDict test split
+predictions = trainer.predict(test_dataset).predictions
+
+# Get predicted class indices
+pred_ids = np.argmax(predictions, axis=-1)
+
+# Map indices back to label names
+ID2LABEL = {0: "Ambivalent", 1: "Clear Non-Reply", 2: "Clear Reply"}
+pred_labels = [ID2LABEL[i] for i in pred_ids]
+
+# Sanity checks
+assert len(pred_labels) == len(test_dataset), f"Expected {len(test_dataset)} predictions, got {len(pred_labels)}"
+assert set(pred_labels).issubset(set(ID2LABEL.values())), f"Unexpected labels: {set(pred_labels) - set(ID2LABEL.values())}"
+
+# Write to file
+submission_file = "prediction"
+with open(submission_file, "w", encoding="utf-8") as f:
+    for label in pred_labels:
+        f.write(label + "\n")
+
+print(f"Wrote {len(pred_labels)} predictions to {submission_file}")
